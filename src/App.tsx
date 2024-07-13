@@ -4,18 +4,23 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import './App.css'
 import { useStore } from './hooks/useStore'
 import { AUTO_LANGUAGE } from './constants';
+import { LanguageSelector } from "./components/LanguageSelector";
+import { SectionType } from "./types";
 
 function App() {
 
-  const { fromLanguage, toLanguage, interchangeLanguages } = useStore();
+  const { fromLanguage, toLanguage, interchangeLanguages, setFromLanguage, setToLanguage } = useStore();
   return (
     <Container fluid>
       <h1>Translator</h1>
 
       <Row>
         <Col>
-          <h2>From</h2>
-          {fromLanguage}
+          <LanguageSelector
+            type={SectionType.From}
+            value={fromLanguage}
+            onChange={setFromLanguage}
+          />
         </Col>
         <Col>
           <Button
@@ -27,8 +32,11 @@ function App() {
           </Button>
         </Col>
         <Col>
-          <h2>To</h2>
-          {toLanguage}
+          <LanguageSelector
+            type={SectionType.To}
+            value={toLanguage}
+            onChange={setToLanguage}
+          />
         </Col>
       </Row>
     </Container>
