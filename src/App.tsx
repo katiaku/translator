@@ -7,6 +7,7 @@ import { AUTO_LANGUAGE } from './constants';
 import { LanguageSelector } from "./components/LanguageSelector";
 import { SectionType } from "./types";
 import { TextArea } from "./components/TextArea";
+import { useEffect } from "react";
 
 function App() {
 
@@ -22,6 +23,13 @@ function App() {
     setFromText,
     setResult
   } = useStore();
+
+  useEffect(() => {
+    if (fromText === '') return
+
+    // TODO: translate logic
+    console.log(fromText, 'useEffect')
+  }, [fromText, fromLanguage, toLanguage]);
 
   return (
     <Container fluid>
@@ -43,7 +51,7 @@ function App() {
           </Stack>
         </Col>
 
-        <Col>
+        <Col xs='auto'>
           <Button
             variant="link"
             disabled={fromLanguage === AUTO_LANGUAGE}
@@ -54,7 +62,7 @@ function App() {
         </Col>
 
         
-          <Col xs='auto'>
+          <Col>
             <Stack gap={2}>
               <LanguageSelector
                 type={SectionType.To}
