@@ -8,6 +8,7 @@ import { LanguageSelector } from "./components/LanguageSelector";
 import { SectionType } from "./types";
 import { TextArea } from "./components/TextArea";
 import { useEffect } from "react";
+import { useDebounce } from "./hooks/useDebounce";
 
 function App() {
 
@@ -24,12 +25,14 @@ function App() {
     setResult
   } = useStore();
 
+  const debouncedFromText = useDebounce(fromText, 300);
+
   useEffect(() => {
-    if (fromText === '') return
+    if (debouncedFromText === '') return
 
     // TODO: translate logic
-    console.log(fromText, 'useEffect')
-  }, [fromText, fromLanguage, toLanguage]);
+    console.log(debouncedFromText, 'useEffect')
+  }, [debouncedFromText, fromLanguage, toLanguage]);
 
   return (
     <Container fluid>
