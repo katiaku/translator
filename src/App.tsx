@@ -41,7 +41,9 @@ function App() {
 
   return (
     <Container fluid>
-      <h1>Translator</h1>
+      <div className="d-flex justify-content-center align-items-center mb-4 pb-4">
+        <h1 className="custom-font">Translator</h1>
+      </div>
 
       <Row>
         <Col>
