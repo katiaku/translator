@@ -1,3 +1,4 @@
+import { FiCopy } from "react-icons/fi"; 
 import { CgArrowsExchange } from "react-icons/cg"; 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap'
@@ -33,6 +34,10 @@ function App() {
     // TODO: translate logic
     console.log(debouncedFromText, 'useEffect')
   }, [debouncedFromText, fromLanguage, toLanguage]);
+
+  const handleClipboard = () => {
+    navigator.clipboard.writeText(result).catch(() => {})
+  }
 
   return (
     <Container fluid>
@@ -72,12 +77,21 @@ function App() {
                 value={toLanguage}
                 onChange={setToLanguage}
               />
-              <TextArea
-                loading={loading}
-                type={SectionType.To}
-                value={result}
-                onChange={setResult}
-              />
+              <div style={{ position: 'relative' }}>
+                <TextArea
+                  loading={loading}
+                  type={SectionType.To}
+                  value={result}
+                  onChange={setResult}
+                />
+                <Button
+                  variant="link"
+                  style={{ position: 'absolute', right: 0, bottom: 0 }}
+                  onClick={handleClipboard}
+                >
+                  <FiCopy />
+                </Button>
+              </div>
             </Stack>
           </Col>
       </Row>
