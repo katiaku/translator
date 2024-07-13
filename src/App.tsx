@@ -1,18 +1,37 @@
+import { CgArrowsExchange } from "react-icons/cg"; 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import './App.css'
-import { useStore } from './hooks/useStore';
+import { useStore } from './hooks/useStore'
+import { AUTO_LANGUAGE } from './constants';
 
 function App() {
 
-  const { fromLanguage, setFromLanguage } = useStore();
+  const { fromLanguage, toLanguage, interchangeLanguages } = useStore();
   return (
-    <div className='App'>
+    <Container fluid>
       <h1>Translator</h1>
-      <button onClick={() => {
-        setFromLanguage("es")
-      }}>Change To Spanish</button>
-      {fromLanguage}
-    </div>
+
+      <Row>
+        <Col>
+          <h2>From</h2>
+          {fromLanguage}
+        </Col>
+        <Col>
+          <Button
+            variant="link"
+            disabled={fromLanguage === AUTO_LANGUAGE}
+            onClick={interchangeLanguages}
+          >
+            <CgArrowsExchange />
+          </Button>
+        </Col>
+        <Col>
+          <h2>To</h2>
+          {toLanguage}
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
